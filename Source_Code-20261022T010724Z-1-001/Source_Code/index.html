@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Periodic Table Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1><span class="logo">⚛</span> Periodic Table <span class="glow-word">Explorer</span></h1>
+      <p>Explore all 118 elements. Click one to look inside the atom.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <form id="search-form" class="search-bar" autocomplete="off">
+        <label for="search-input" class="visually-hidden">Search element</label>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="🔍  Search by name, symbol, or atomic number (e.g. Gold, Au, 79)"
+        >
+        <button type="submit" class="primary">Search</button>
+        <button type="button" id="clear-btn" class="secondary">Reset</button>
+      </form>
+
+      <div class="filters" aria-label="Filters">
+        <button class="filter-btn active" data-filter="all">All (Periodic Table)</button>
+
+        <span class="divider"></span>
+        <span class="filter-label">Group</span>
+        <button class="filter-btn" data-filter="metal">Metal</button>
+        <button class="filter-btn" data-filter="nonmetal">Nonmetal</button>
+        <button class="filter-btn" data-filter="noble gas">Noble Gas</button>
+
+        <span class="divider"></span>
+        <span class="filter-label">State</span>
+        <button class="filter-btn" data-filter="solid">Solid</button>
+        <button class="filter-btn" data-filter="liquid">Liquid</button>
+        <button class="filter-btn" data-filter="gas">Gas</button>
+      </div>
+
+      <div class="color-mode">
+        <span class="filter-label">Colors</span>
+        <button class="mode-btn active" data-mode="category">By category</button>
+        <button class="mode-btn" data-mode="cpk">CPK colors</button>
+      </div>
+    </section>
+
+    <div id="legend" class="legend"></div>
+
+    <p id="status" class="status" role="status"></p>
+    <button id="retry-btn" class="retry hidden">Try again</button>
+
+    <div class="scroll-x">
+      <section id="elements-grid" aria-label="Elements"></section>
+    </div>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button id="close-btn" class="icon-btn close-btn" aria-label="Close">&times;</button>
+
+      <div class="modal-body">
+        <figure class="modal-figure">
+          <div id="modal-pic" class="modal-pic">
+            <span id="modal-symbol" class="modal-symbol">--</span>
+            <img id="modal-img" alt="">
+          </div>
+          <figcaption id="modal-caption"></figcaption>
+        </figure>
+
+        <div class="modal-info">
+          <p id="modal-number" class="modal-number"></p>
+          <h2 id="modal-title">Element</h2>
+          <span id="modal-badge" class="badge"></span>
+
+          <dl class="details">
+            <dt>Atomic Mass</dt>            <dd id="d-mass"></dd>
+            <dt>Group Block</dt>            <dd id="d-group"></dd>
+            <dt>State</dt>                  <dd id="d-state"></dd>
+            <dt>Electron Config.</dt>       <dd id="d-config"></dd>
+            <dt>Melting Point</dt>          <dd id="d-melt"></dd>
+            <dt>Boiling Point</dt>          <dd id="d-boil"></dd>
+            <dt>Density</dt>                <dd id="d-density"></dd>
+            <dt>Discovered By</dt>          <dd id="d-year"></dd>
+          </dl>
+        </div>
+      </div>
+
+      <p id="modal-summary" class="modal-summary"></p>
+
+      <div class="modal-nav">
+        <button id="prev-btn" class="secondary">‹ Previous</button>
+        <button id="next-btn" class="secondary">Next ›</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Data from the <a href="https://github.com/Bowserinator/Periodic-Table-JSON" target="_blank" rel="noopener">Periodic-Table-JSON</a> project.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
